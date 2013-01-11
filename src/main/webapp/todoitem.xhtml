@@ -12,9 +12,7 @@
 		</div>
 
 		<h:form id="reg">
-			<h2>Todo List Creation</h2>
-			<p>Enforces annotation-based constraints defined on the model
-				class.</p>
+			<h2>Add TodoItems</h2>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="task" value="TodoItem" />
 				<h:inputText id="task" value="#{newTodoItem.task}" />
@@ -43,32 +41,29 @@
 				</h:panelGrid>
 			</p>
 		</h:form>
-		<h2>Created TodoLists</h2>
-		<h:panelGroup rendered="#{empty todolists}">
-			<em>No todolists.</em>
+		<h2>Added TodoItems</h2>
+		<h:panelGroup rendered="#{empty todoItems">
+			<em>No TodoItems.</em>
 		</h:panelGroup>
-		<h:dataTable var="_todo" value="#{todolists}"
-			rendered="#{not empty todolists}" styleClass="simpletablestyle">
+		<h:dataTable var="_todo" value="#{todoItems}"
+			rendered="#{not empty todoItems}" styleClass="simpletablestyle">
 			<h:column>
 				<f:facet name="header">Id</f:facet>
                 #{_todo.id}
             </h:column>
 			<h:column>
-				<f:facet name="header">TodoItem</f:facet>
-                #{_todo.name}
-            </h:column>
-			<h:column>
-				<f:facet name="header">Created By</f:facet>
-                #{_todo.createdBy.email}
+				<f:facet name="header">Task</f:facet>
+                #{_todo.task}
             </h:column>
 			<h:column>
 				<f:facet name="header">Created On</f:facet>
                 #{_todo.createdOn}
             </h:column>
 			<h:column>
-				<f:facet name="header">Add Item</f:facet>
-				<a href="/todoitem.jsf">Add TodoItem</a>
-			</h:column>
+				<f:facet name="header">Due On</f:facet>
+                #{_todo.dueOn}
+            </h:column>
+			
 		</h:dataTable>
 	</ui:define>
 </ui:composition>

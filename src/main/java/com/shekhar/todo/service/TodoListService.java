@@ -21,6 +21,9 @@ public class TodoListService {
 	
 	@Inject
 	Event<TodoList> todoEvent;
+	
+	@Inject
+	Event<TodoItem> todoItemEvent;
 
 	public TodoList create(TodoList todoList) {
 		logger.info("Persisting TodoList with name " + todoList.getName());
@@ -34,6 +37,7 @@ public class TodoListService {
 		entityManager.persist(todoItem);
 		todoList.getTodoItems().add(todoItem);
 		entityManager.persist(todoList);
+		todoItemEvent.fire(todoItem);
 		return todoItem;
 	}
 }
