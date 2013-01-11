@@ -4,18 +4,18 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.shekhar.todo.cdi.repository.UserRepository;
-import com.shekhar.todo.domain.TodoList;
-import com.shekhar.todo.domain.User;
+import com.shekhar.todo.domain.TodoItem;
 import com.shekhar.todo.service.TodoListService;
 import com.shekhar.todo.service.UserService;
 
 @Model
-public class TodoListController {
+public class TodoItemController {
 
 	@Inject
 	private TodoListService todoListService;
@@ -28,45 +28,35 @@ public class TodoListController {
 
 	@Produces
 	@Named
-	private TodoList newTodoList;
+	private TodoItem newTodoItem;
 
 	@Inject
 	private FacesContext facesContext;
 	
+
 	@PostConstruct
-	public void initNewTodoList() {
-		newTodoList = new TodoList();
+	public void initNewTodoItem() {
+		newTodoItem = new TodoItem();
 	}
 
-	public void createNewTodoList(String email) {
+	public void addTodo(Long todoListId) {
 		try {
-			System.out.println("Finding User with " + email);
-			User user = userRepository.findByEmail(email);
-			System.out.println("Found User " + user);
-			if (user == null) {
-				throw new RuntimeException("No user found with email " + email);
-			}
-			newTodoList.setCreatedBy(user);
-			System.out.println("Persisting todo list");
-			todoListService.create(newTodoList);
-			System.out.println("created todo list" + newTodoList);
-			user.getTodoLists().add(newTodoList);
-			userService.update(user);
+			todoListService.addTodo(todoListId, newTodoItem);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Created!", "TodoList creation successful");
+					"Created!", "TodoItem creation successful");
 			facesContext.addMessage(null, m);
-			initNewTodoList();
+			initNewTodoItem();
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					errorMessage, "TodoList creation unsuccessful");
+					errorMessage, "TodoItem unsuccessful");
 			facesContext.addMessage(null, m);
 		}
 	}
 	
 	private String getRootErrorMessage(Exception e) {
 		// Default to general error message that registration failed.
-		String errorMessage = "Todolist creation failed. See server log for more information";
+		String errorMessage = "TodoItem creation failed. See server log for more information";
 		if (e == null) {
 			// This shouldn't happen, but return the default messages
 			return errorMessage;

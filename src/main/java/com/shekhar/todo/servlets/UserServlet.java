@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.shekhar.todo.domain.User;
-import com.shekhar.todo.domain.UserBuilder;
 import com.shekhar.todo.service.UserService;
 
 /**
@@ -49,9 +48,7 @@ public class UserServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		User user = UserBuilder.user().withEmail("test_user@testemail.com")
-				.withPassword("password").withAddedHobby("running")
-				.withAddedHobby("swimming").withAddedHobby("coding").build();
+		User user = new User();
 		userDao.register(user);
 
 		response.getWriter().print("User created : " + user);

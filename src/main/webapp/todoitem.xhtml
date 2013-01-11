@@ -16,21 +16,26 @@
 			<p>Enforces annotation-based constraints defined on the model
 				class.</p>
 			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="name" value="TodoList" />
-				<h:inputText id="name" value="#{newTodoList.name}" />
-				<h:message for="name" errorClass="invalid" />
+				<h:outputLabel for="task" value="TodoItem" />
+				<h:inputText id="task" value="#{newTodoItem.task}" />
+				<h:message for="task" errorClass="invalid" />
 
-				<h:outputLabel for="email" value="Created By:" />
-				<h:inputText id="email" value="#{email}" />
-				<h:message for="email" errorClass="invalid" />
-
+				<h:outputLabel for="dueOn" value="TodoItem" />
+				<h: id="dueOn" value="#{newTodoItem.dueOn}" />
+				<h:message for="dueOn" errorClass="invalid" />
+				
+				<h:outputLabel for="todoId" value="TodoList Id" />
+				<h: id="todoListId" value="#{todoListId}" />
+				<h:message for="todoListId" errorClass="invalid" />
+				
+				
 			</h:panelGrid>
 
 			<p>
 				<h:panelGrid columns="2">
 					<h:commandButton id="register"
-						action="#{todoListController.createNewTodoList(email)}"
-						value="Create New Todo List" styleClass="register" />
+						action="#{todoItemController.addTodo(todoListId)}"
+						value="Create New TodoItem" styleClass="register" />
 					<h:messages styleClass="messages" errorClass="invalid"
 						infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>
@@ -47,7 +52,7 @@
                 #{_todo.id}
             </h:column>
 			<h:column>
-				<f:facet name="header">TodoList</f:facet>
+				<f:facet name="header">TodoItem</f:facet>
                 #{_todo.name}
             </h:column>
 			<h:column>
