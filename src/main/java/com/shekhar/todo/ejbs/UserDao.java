@@ -3,6 +3,7 @@ package com.shekhar.todo.ejbs;
 import javax.ejb.Singleton;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import com.shekhar.todo.domain.User;
 
@@ -12,7 +13,7 @@ import com.shekhar.todo.domain.User;
 @Singleton
 public class UserDao {
 
-	@Inject
+	@PersistenceContext
 	private EntityManager entityManager;
 
     public User createUser(User user){
