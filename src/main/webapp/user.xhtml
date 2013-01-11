@@ -9,7 +9,6 @@
 
         <div>
             <p>Welcome to JUDCon 2013 : Todo Application Running on OpenShift</p>
-            <h2>Powered By OpenShift</h2>
         </div>
 
         <h:form id="reg">
@@ -22,7 +21,7 @@
                 <h:message for="email" errorClass="invalid" />
 
                 <h:outputLabel for="password" value="Password:" />
-                <h:inputText id="password" value="#{newUser.password}" />
+                <h:inputSecret id="password" value="#{newUser.password}" />
                 <h:message for="password" errorClass="invalid" />
 
             </h:panelGrid>

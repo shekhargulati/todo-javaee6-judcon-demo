@@ -30,7 +30,7 @@ public class RegisteredUserListProducer {
         return users;
     }
 
-    public void onMemberListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final User member) {
+    public void onMemberListChanged(@Observes(notifyObserver = Reception.IF_EXISTS) final User user) {
         retrieveAllMembersOrderedByName();
     }
 
