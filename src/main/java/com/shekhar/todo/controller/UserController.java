@@ -9,13 +9,13 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.shekhar.todo.domain.User;
-import com.shekhar.todo.service.UserRegisterationService;
+import com.shekhar.todo.service.UserService;
 
 @Model
 public class UserController {
 
 	@Inject
-	private UserRegisterationService userRegisterationService;
+	private UserService userRegisterationService;
 	
 	@Produces
     @Named

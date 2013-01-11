@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.shekhar.todo.domain.User;
 import com.shekhar.todo.domain.UserBuilder;
-import com.shekhar.todo.service.UserRegisterationService;
+import com.shekhar.todo.service.UserService;
 
 /**
  * Servlet implementation class UserServlet
@@ -21,7 +21,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	UserRegisterationService userDao;
+	UserService userDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()

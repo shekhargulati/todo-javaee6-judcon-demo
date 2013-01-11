@@ -16,7 +16,7 @@ import com.shekhar.todo.domain.User;
  * 
  */
 @Stateless
-public class UserRegisterationService {
+public class UserService {
 
 	@Inject
 	private EntityManager entityManager;

@@ -1,6 +1,7 @@
 package com.shekhar.todo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class User implements Serializable {
 	private Date registeredOn = new Date();
 
 	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-	private List<TodoList> todoLists;
+	private List<TodoList> todoLists = new ArrayList<TodoList>();
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Hobbies", joinColumns = @JoinColumn(name = "user_id"))
