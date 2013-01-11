@@ -2,6 +2,7 @@ package com.shekhar.todo.servlets;
 
 import java.io.IOException;
 
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,41 +20,42 @@ import com.shekhar.todo.ejbs.UserDao;
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	@Inject
+
+	@EJB
 	UserDao userDao;
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		User user = userDao.findUser(Long.valueOf(userId));
-		
-		response.getWriter().print("Found User : "+user);
+	public UserServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		User user = userDao.findUser(Long.valueOf(userId));
+
+		response.getWriter().print("Found User : " + user);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		User user = UserBuilder.user().withEmail("test_user@testemail.com")
-				.withPassword("password")
-				.withAddedHobby("running")
-				.withAddedHobby("swimming")
-				.withAddedHobby("coding")
-				.build();
+				.withPassword("password").withAddedHobby("running")
+				.withAddedHobby("swimming").withAddedHobby("coding").build();
 		userDao.createUser(user);
-		
-		response.getWriter().print("User created : "+user);
+
+		response.getWriter().print("User created : " + user);
 	}
 
 }
