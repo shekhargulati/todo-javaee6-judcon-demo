@@ -2,7 +2,6 @@ package com.shekhar.todo.servlets;
 
 import java.io.IOException;
 
-import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +20,7 @@ import com.shekhar.todo.ejbs.UserDao;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	@EJB
+	@Inject
 	UserDao userDao;
 
 	/**
