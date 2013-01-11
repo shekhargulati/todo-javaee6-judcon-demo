@@ -20,8 +20,10 @@
 				<h:inputText id="task" value="#{newTodoItem.task}" />
 				<h:message for="task" errorClass="invalid" />
 
-				<h:outputLabel for="dueOn" value="TodoItem" />
-				<h:inputText id="dueOn" value="#{newTodoItem.dueOn}" />
+				<h:outputLabel for="dueOn" value="Due On" />
+				<h:inputText id="dueOn" value="#{newTodoItem.dueOn}">
+				<f:convertDateTime pattern="d-M-yyyy" />
+				</h:inputText>
 				<h:message for="dueOn" errorClass="invalid" />
 				
 				<h:outputLabel for="todoId" value="TodoList Id" />
