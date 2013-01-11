@@ -23,6 +23,11 @@
                 <h:outputLabel for="password" value="Password:" />
                 <h:inputSecret id="password" value="#{newUser.password}" />
                 <h:message for="password" errorClass="invalid" />
+                
+                <h:outputLabel for="hobbies" value="Hobbies" />
+                <h:inputText id="hobbies" value="#{newUser.hobbies}" converter="commaSeparatedFieldConverter"/>
+                <h:message for="hobbies" errorClass="invalid" />
+                
 
             </h:panelGrid>
 

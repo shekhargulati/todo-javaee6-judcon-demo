@@ -16,11 +16,11 @@
             <p>Enforces annotation-based constraints defined on the
                 model class.</p>
             <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name" />
+                <h:outputLabel for="name" value="TodoList" />
                 <h:inputText id="name" value="#{newTodoList.name}" />
                 <h:message for="name" errorClass="invalid" />
 
-                <h:outputLabel for="email" value="Email:" />
+                <h:outputLabel for="email" value="Created By:" />
                 <h:inputText id="email" value="#{email}" />
                 <h:message for="email" errorClass="invalid" />
 
@@ -47,6 +47,10 @@
             <h:column>
                 <f:facet name="header">Id</f:facet>
                 #{_todo.id}
+            </h:column>
+            <h:column>
+                <f:facet name="header">TodoList</f:facet>
+                #{_todo.name}
             </h:column>
             <h:column>
                 <f:facet name="header">Created By</f:facet>

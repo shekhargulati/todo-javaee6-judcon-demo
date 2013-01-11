@@ -41,7 +41,7 @@ public class User implements Serializable {
 	@NotNull
 	private Date registeredOn = new Date();
 
-	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
 	private List<TodoList> todoLists = new ArrayList<TodoList>();
 
 	@ElementCollection(fetch = FetchType.EAGER)
