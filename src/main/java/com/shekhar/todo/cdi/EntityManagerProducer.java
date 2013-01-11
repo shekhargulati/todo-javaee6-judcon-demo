@@ -20,9 +20,6 @@ public class EntityManagerProducer {
     }
 
     public void closeEntityManager(@Disposes EntityManager em) {
-        if (em != null && em.getTransaction().isActive()) {
-            em.getTransaction().rollback();
-        }
         if (em != null && em.isOpen()) {
             em.close();
         }
