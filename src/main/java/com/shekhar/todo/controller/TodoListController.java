@@ -33,30 +33,23 @@ public class TodoListController {
 	@Inject
 	private FacesContext facesContext;
 
-	private String email;
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	@PostConstruct
 	public void initNewTodoList() {
 		newTodoList = new TodoList();
-		email = null;
 	}
 
-	public void createNewTodoList() {
+	public void createNewTodoList(String email) {
 		try {
-			System.out.println("Finding User");
+			System.out.println("Finding User with " + email);
 			User user = userRepository.findByEmail(email);
-			System.out.println("Found User "+user);
+			System.out.println("Found User " + user);
 			if (user == null) {
 				throw new RuntimeException("No user found with email " + email);
 			}
 			newTodoList.setCreatedBy(user);
 			System.out.println("Persisting todo list");
 			todoListService.create(newTodoList);
-			System.out.println("created todo list"+newTodoList);
+			System.out.println("created todo list" + newTodoList);
 			user.getTodoLists().add(newTodoList);
 			userService.update(user);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,

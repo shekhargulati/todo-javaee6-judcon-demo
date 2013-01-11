@@ -29,7 +29,7 @@
             <p>
                 <h:panelGrid columns="2">
                     <h:commandButton id="register"
-                        action="#{todoListController.createNewTodoList}"
+                        action="#{todoListController.createNewTodoList(email)}"
                         value="Create New Todo List" styleClass="register" />
                     <h:messages styleClass="messages"
                         errorClass="invalid" infoClass="valid"
