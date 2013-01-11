@@ -16,25 +16,34 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Table(name="Users")
-public class User implements Serializable{
+@Table(name = "Users")
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull
+	@Email
 	private String email;
 
+	@NotNull
+	@Size(max = 10, min = 6)
 	private String password;
 
+	@NotNull
 	private Date registeredOn = new Date();
 
-	@OneToMany(mappedBy="createdBy",cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
 	private List<TodoList> todoLists;
 
-	@ElementCollection(fetch=FetchType.EAGER)
+	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "Hobbies", joinColumns = @JoinColumn(name = "user_id"))
 	@Column(name = "hobby")
 	private List<String> hobbies;

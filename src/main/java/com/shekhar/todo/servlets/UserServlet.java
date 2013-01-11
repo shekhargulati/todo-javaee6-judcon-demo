@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.shekhar.todo.domain.User;
 import com.shekhar.todo.domain.UserBuilder;
-import com.shekhar.todo.ejbs.UserDao;
+import com.shekhar.todo.service.UserRegisterationService;
 
 /**
  * Servlet implementation class UserServlet
@@ -21,7 +21,7 @@ public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	UserDao userDao;
+	UserRegisterationService userDao;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String userId = request.getParameter("userId");
-		User user = userDao.findUser(Long.valueOf(userId));
+		User user = userDao.search(Long.valueOf(userId));
 
 		response.getWriter().print("Found User : " + user);
 	}
@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
 		User user = UserBuilder.user().withEmail("test_user@testemail.com")
 				.withPassword("password").withAddedHobby("running")
 				.withAddedHobby("swimming").withAddedHobby("coding").build();
-		userDao.createUser(user);
+		userDao.register(user);
 
 		response.getWriter().print("User created : " + user);
 	}
