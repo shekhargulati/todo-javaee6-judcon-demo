@@ -10,7 +10,6 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,6 +19,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
@@ -41,12 +42,14 @@ public class User implements Serializable {
 	@NotNull
 	private Date registeredOn = new Date();
 
-	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<TodoList> todoLists = new ArrayList<TodoList>();
 
-	@ElementCollection(fetch = FetchType.EAGER)
+	@ElementCollection
 	@CollectionTable(name = "Hobbies", joinColumns = @JoinColumn(name = "user_id"))
 	@Column(name = "hobby")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<String> hobbies;
 
 	public Long getId() {
