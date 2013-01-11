@@ -25,7 +25,9 @@
                 <h:message for="password" errorClass="invalid" />
                 
                 <h:outputLabel for="hobbies" value="Hobbies" />
-                <h:inputText id="hobbies" value="#{newUser.hobbies}" converter="commaSeparatedFieldConverter"/>
+                <h:inputText id="hobbies" value="#{newUser.hobbies}">
+                	<f:converter converterId="commaSeparatedFieldConverter"></f:converter>
+                </h:inputText>
                 <h:message for="hobbies" errorClass="invalid" />
                 
 
