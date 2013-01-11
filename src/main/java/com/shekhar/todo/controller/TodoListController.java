@@ -47,12 +47,16 @@ public class TodoListController {
 
 	public void createNewTodoList() {
 		try {
+			System.out.println("Finding User");
 			User user = userRepository.findByEmail(email);
+			System.out.println("Found User "+user);
 			if (user == null) {
 				throw new RuntimeException("No user found with email " + email);
 			}
 			newTodoList.setCreatedBy(user);
+			System.out.println("Persisting todo list");
 			todoListService.create(newTodoList);
+			System.out.println("created todo list"+newTodoList);
 			user.getTodoLists().add(newTodoList);
 			userService.update(user);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO,
