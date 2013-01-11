@@ -42,7 +42,7 @@
 			</p>
 		</h:form>
 		<h2>Added TodoItems</h2>
-		<h:panelGroup rendered="#{empty todoItems">
+		<h:panelGroup rendered="#{empty todoItems}">
 			<em>No TodoItems.</em>
 		</h:panelGroup>
 		<h:dataTable var="_todo" value="#{todoItems}"
